@@ -1,0 +1,82 @@
+{
+  "PS4": [
+    {
+      "name": "Canis Canem Edit",
+      "price": 11.99,
+      "price plus": 11.99,
+      "best price": 4.99
+    },
+    {
+      "name": "Evil West",
+      "price": 37.49,
+      "price plus": 37.49,
+      "best price": 37.49
+    },
+    {
+      "name": "God Of War Ragnar\u00f6k",
+      "price": 69.99,
+      "price plus": 69.99,
+      "best price": 69.99
+    },
+    {
+      "name": "Marvel's Midnight Suns",
+      "price": 59.99,
+      "price plus": 59.99,
+      "best price": 59.99
+    },
+    {
+      "name": "Star Wars Heritage Pack",
+      "price": 39.99,
+      "price plus": 39.99,
+      "best price": 15.99
+    },
+    {
+      "name": "Superliminal",
+      "price": 16.99,
+      "price plus": 16.99,
+      "best price": 8.49
+    },
+    {
+      "name": "The Callisto Protocol",
+      "price": 54.99,
+      "price plus": 54.99,
+      "best price": 43.99
+    },
+    {
+      "name": "The Dark Pictures Anthology: House Of Ashes PS4 & PS5",
+      "price": 24.99,
+      "price plus": 24.99,
+      "best price": 12.49
+    },
+    {
+      "name": "The Dark Pictures Anthology: The Devil In Me PS4 & PS5",
+      "price": 0.0,
+      "price plus": 0.0,
+      "best price": 0.0
+    },
+    {
+      "name": "The Evil Within",
+      "price": 3.99,
+      "price plus": 3.99,
+      "best price": 3.19
+    },
+    {
+      "name": "The Evil Within 2",
+      "price": 34.99,
+      "price plus": 34.99,
+      "best price": 5.24
+    },
+    {
+      "name": "The Quarry For PS4",
+      "price": 29.99,
+      "price plus": 29.99,
+      "best price": 19.79
+    },
+    {
+      "name": "World War Z",
+      "price": 24.99,
+      "price plus": 24.99,
+      "best price": 6.24
+    }
+  ]
+}
