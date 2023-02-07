@@ -12,7 +12,8 @@ def add(name, games, console):
             "price": None,
             "price plus": None,
             "best price": None,
-            "base price": None
+            "base price": None,
+            "notification": False
         }
     else:
         new_data = {
@@ -20,6 +21,7 @@ def add(name, games, console):
             "price": None,
             "best price": None,
             "base price": None,
+            "notification": False
         }
     games.append(new_data)
 

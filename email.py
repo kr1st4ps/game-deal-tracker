@@ -1,6 +1,7 @@
 from email.message import EmailMessage
 import ssl
 import smtplib
+#TODO add config
 
 def send(message, console):
     sender = "kristaps.almanis14@gmail.com"

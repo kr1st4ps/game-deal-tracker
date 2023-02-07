@@ -10,6 +10,7 @@ import configparser #TODO Implement
 #TODO prettify email (fonts, size, pictures)
 #TODO add oculus store
 #TODO add steam
+#TODO add Amazon
 
 #   Loads json of games that need to be in the local games.json
 game_list_api = BeautifulSoup(requests.get("https://kr1st4ps.github.io/Data/games_list.json").text, "html.parser")

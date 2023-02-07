@@ -2,9 +2,8 @@ import requests
 from bs4 import BeautifulSoup
 import json
 import re
-
-def game_list():
-    search = json.load(BeautifulSoup(requests.get("https://raw.githubusercontent.com/kr1st4ps/game-deal-tracker/main/mailcode.txt?token=GHSAT0AAAAAAB6NJ2ZORLCZTYMQL4OC4SECY7BKF6Q").text, "html.parser"))
+#TODO add config
+#TODO shorten the code
 
 def ps4(game_name):
     url = "https://psprices.com/region-gb/search/?q=" + game_name.replace(" ", "+")
