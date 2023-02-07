@@ -1,20 +1,26 @@
-import fetch
+import utils.fetch
 import json
-import email
+import utils.email
 import requests
 from bs4 import BeautifulSoup
-import modify_json
+import utils.modify_json
 import configparser 
 config = configparser.ConfigParser()
-config.read("config.ini")
+config.read("utils/config.ini")
 
-#TODO fix The Devil In Me
-#TODO prettify email (fonts, size, pictures)
-#TODO prettify code
+#TODO logic to decide wether to send email or not
+#TODO make code be usable on Windows machines
+#TODO create a requirements file
+#TODO fill up the readme file
+#TODO in fetch add regex part to config somehow
 #TODO add oculus store
 #TODO add steam
 #TODO add Amazon
-#TODO logic to decide wether to send email or not
+#TODO prettify code here
+#TODO shorten the code in fetch.py
+#TODO prettify code in email.py
+#TODO fix The Devil In Me
+#TODO prettify email (fonts, size, pictures)
 
 #   Loads json of games that need to be in the local games.json
 game_list_api = BeautifulSoup(requests.get(config["USER_DEFINED"]["GAME_LIST"]).text, "html.parser")
