@@ -4,21 +4,25 @@ import email
 import requests
 from bs4 import BeautifulSoup
 import modify_json
-import configparser #TODO Implement
+import configparser 
+config = configparser.ConfigParser()
+config.read("config.ini")
 
 #TODO fix The Devil In Me
 #TODO prettify email (fonts, size, pictures)
+#TODO prettify code
 #TODO add oculus store
 #TODO add steam
 #TODO add Amazon
+#TODO logic to decide wether to send email or not
 
 #   Loads json of games that need to be in the local games.json
-game_list_api = BeautifulSoup(requests.get("https://kr1st4ps.github.io/Data/games_list.json").text, "html.parser")
+game_list_api = BeautifulSoup(requests.get(config["USER_DEFINED"]["GAME_LIST"]).text, "html.parser")
 game_list = json.load(game_list_api)
 ps_game_list = game_list["PS4"]
 
 #   Opens local games.json file
-with open("games.json", "r") as file:
+with open(config["GLOBAL"]["RESULT_FILE"], "r") as file:
     games = json.load(file)
 ps_games = games["PS4"]
 steam_games = games["Steam"]
@@ -65,5 +69,5 @@ for game in ps_games:
 email.send(message, "PS4")
 
 #   Writes data to json file
-with open("games.json", "w") as file:
+with open(config["GLOBAL"]["RESULT_FILE"], "w") as file:
     json.dump(games, file, indent=2, separators=(',', ': '))

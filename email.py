@@ -1,13 +1,17 @@
 from email.message import EmailMessage
 import ssl
 import smtplib
-#TODO add config
+import configparser
+config = configparser.ConfigParser()
+config.read("config.ini")
+
+#TODO prettify code
 
 def send(message, console):
-    sender = "kristaps.almanis14@gmail.com"
-    password = "leazlkawfhwezyzf"
+    sender = config["USER_DEFINED"]["EMAIL_SENDER"]
+    password = config["USER_DEFINED"]["EMAIL_PASSWORD"]
 
-    receiver = "kristaps.almanis14@gmail.com"
+    receiver = config["USER_DEFINED"]["EMAIL_RECEIVER"]
 
     if console == "PS4":
         subject = "New PS4 game deals you might like..."
