@@ -65,3 +65,11 @@ def ps4_base(game_name):
             return best_price
     
     return None
+
+
+def steam(game_name):
+    url = "https://steamdb.info/search/?a=app&q=" + game_name.replace(" ", "+")
+    search = BeautifulSoup(requests.get(url).text, "html.parser")
+    print("start")
+    for item in search.find_all('div', {'class':'dataTable_table_wrap'}):
+        print(item)
