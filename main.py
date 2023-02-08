@@ -1,14 +1,14 @@
-import utils.fetch
+import utils.fetch as fetch
 import json
-import utils.email
+import utils.email as email
 import requests
 from bs4 import BeautifulSoup
-import utils.modify_json
+import utils.modify_json as modify_json
 import configparser 
 config = configparser.ConfigParser()
 config.read("utils/config.ini")
 
-#TODO logic to decide wether to send email or not
+
 #TODO make code be usable on Windows machines
 #TODO create a requirements file
 #TODO fill up the readme file
@@ -34,7 +34,7 @@ ps_games = games["PS4"]
 steam_games = games["Steam"]
 oculus_games = games["Oculus"]
 
-#TODO for steam and oculus as well
+
 #   Collects games from the local json
 list_of_current_games = []
 for game_from_json in ps_games:
@@ -53,6 +53,7 @@ for game in list_of_current_games:
 
 #   Fetches data for each game and compiles a message to send to the email
 message = "These games from your wishlist have good deals:\n"
+no_ps_deals = 0
 for game in ps_games:
     if game["best price"] is None:
         game["best price"] = fetch.ps4_best(game["name"])
@@ -66,13 +67,16 @@ for game in ps_games:
     if game["price"] == game["best price"] and game["price"] != game["base price"] and game["notification"] == False:
         game["notification"] == True
         message += "\n\t" + game["name"] + " is now " + str(game["price"]) + "\n"
+        no_ps_deals += 1
     elif game["price"] < game["best price"] and game["notification"] == False:
         game["best price"] = game["price"]
         game["notification"] == True
         message += "\n\t" + "ALL TIME LOW - " + game["name"] + " is now just " + str(game["price"]) + "\n"
+        no_ps_deals += 1
 
 #   Sends message to email
-email.send(message, "PS4")
+if no_ps_deals > 0:
+    email.send(message, "PS4")
 
 #   Writes data to json file
 with open(config["GLOBAL"]["RESULT_FILE"], "w") as file:
