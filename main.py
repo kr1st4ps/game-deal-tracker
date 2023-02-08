@@ -18,8 +18,6 @@ else:
 config = configparser.ConfigParser()
 config.read("utils" + os_slash + "config.ini")
 
-#TODO create a requirements file
-#TODO fill up the readme file
 #TODO in fetch add regex part to config somehow
 #TODO add oculus store
 #TODO add steam

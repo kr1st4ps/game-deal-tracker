@@ -1,2 +1,5 @@
 # game-deal-tracker
-Scheduled tracker for video game deals
+
+-   Change config.ini file accordingly to your needs (using github.io create a json file games you want to track)
+
+-   Check requirements.txt
