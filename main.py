@@ -5,11 +5,19 @@ import requests
 from bs4 import BeautifulSoup
 import utils.modify_json as modify_json
 import configparser 
+import os
+import pathlib
+
+if os.name == "nt":
+    #path = str(pathlib.Path(__file__).parent.resolve()) + "\vrGames.csv"
+    os_slash = "\\"
+else:
+    #path = str(pathlib.Path(__file__).parent.resolve()) + "/vrGames.csv"
+    os_slash = "/"
+
 config = configparser.ConfigParser()
-config.read("utils/config.ini")
+config.read("utils" + os_slash + "config.ini")
 
-
-#TODO make code be usable on Windows machines
 #TODO create a requirements file
 #TODO fill up the readme file
 #TODO in fetch add regex part to config somehow
