@@ -37,7 +37,7 @@ def ps4_best(game_name):
         if item_json["name"].lower() == game_name.lower():
             url = config["GLOBAL"]["PSPRICES"] + item_json["url"]
             game_page = BeautifulSoup(requests.get(url).text, "html.parser")
-            prices = game_page.find_all(text=re.compile("^\£"))
+            prices = game_page.find_all(text=re.compile("^\{}".format(config["GLOBAL"]["PSPRICES_CURRENCY"])))
             if len(prices) == 3:
                 best_price = float(prices[1].replace(config["GLOBAL"]["PSPRICES_CURRENCY"], ""))
             else:
@@ -56,7 +56,7 @@ def ps4_base(game_name):
         if item_json["name"].lower() == game_name.lower():
             url = config["GLOBAL"]["PSPRICES"] + item_json["url"]
             game_page = BeautifulSoup(requests.get(url).text, "html.parser")
-            prices = game_page.find_all(text=re.compile("^\£"))
+            prices = game_page.find_all(text=re.compile("^\{}".format(config["GLOBAL"]["PSPRICES_CURRENCY"])))
             if len(prices) == 3:
                 best_price = float(prices[0].replace(config["GLOBAL"]["PSPRICES_CURRENCY"], ""))
             else:
@@ -65,11 +65,3 @@ def ps4_base(game_name):
             return best_price
     
     return None
-
-
-def steam(game_name):
-    url = "https://steamdb.info/search/?a=app&q=" + game_name.replace(" ", "+")
-    search = BeautifulSoup(requests.get(url).text, "html.parser")
-    print("start")
-    for item in search.find_all('div', {'class':'dataTable_table_wrap'}):
-        print(item)

@@ -9,22 +9,18 @@ import os
 import pathlib
 
 if os.name == "nt":
-    #path = str(pathlib.Path(__file__).parent.resolve()) + "\vrGames.csv"
     os_slash = "\\"
 else:
-    #path = str(pathlib.Path(__file__).parent.resolve()) + "/vrGames.csv"
     os_slash = "/"
 
 config = configparser.ConfigParser()
 config.read("utils" + os_slash + "config.ini")
 
-#TODO in fetch add regex part to config somehow
+#TODO prettify code in email.py
+#TODO shorten the code in fetch.py
 #TODO add oculus store
 #TODO add steam
 #TODO add Amazon
-#TODO prettify code here
-#TODO shorten the code in fetch.py
-#TODO prettify code in email.py
 #TODO fix The Devil In Me
 #TODO prettify email (fonts, size, pictures)
 
@@ -37,8 +33,8 @@ ps_game_list = game_list["PS4"]
 with open(config["GLOBAL"]["RESULT_FILE"], "r") as file:
     games = json.load(file)
 ps_games = games["PS4"]
-steam_games = games["Steam"]
-oculus_games = games["Oculus"]
+#steam_games = games["Steam"]
+#oculus_games = games["Oculus"]
 
 
 #   Collects games from the local json
