@@ -28,7 +28,6 @@ def ps4(game_name, action=None):
 
     for item in search.find_all('div', {'class':'component--game-card col-span-6 sm:col-span-4 md:col-span-3 lg:col-span-3 xl:col-span-2'}):
         item_json = json.loads(item["data-props"])
-        print(item_json)
         if item_json["name"].lower() == game_name.lower():
             if action == "best price" or action == "base price":
                 url = config["GLOBAL"]["PSPRICES"] + item_json["url"]
@@ -49,6 +48,11 @@ def ps4(game_name, action=None):
             else:
                 price = float(item_json["last_update"]["price"].replace(config["USER DEFINED"]["PSPRICES_CURRENCY"], ""))
                 price_plus = float(item_json["last_update"]["price_plus"].replace(config["USER DEFINED"]["PSPRICES_CURRENCY"], ""))
+                print(game_name)
+                print(str(price) + "    " + str(price_plus))
+                print()
+                print()
+                print()
                 
                 return price, price_plus
 

@@ -13,13 +13,16 @@ config = configparser.ConfigParser()
 config.read("utils" + os_slash + "config.ini")
 
 def send(message, console):
-    sender = config["USER_DEFINED"]["EMAIL_SENDER"]
-    password = config["USER_DEFINED"]["EMAIL_PASSWORD"]
+    sender = config["USER DEFINED"]["EMAIL_SENDER"]
+    password = config["USER DEFINED"]["EMAIL_PASSWORD"]
 
-    receiver = config["USER_DEFINED"]["EMAIL_RECEIVER"]
+    receiver = config["USER DEFINED"]["EMAIL_RECEIVER"]
 
     if console == "PS4":
         subject = "New PS4 game deals you might like..."
+    elif console == "Oculus":
+        subject = "New Quest game deals you might like..."
+
 
     body = message
 

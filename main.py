@@ -19,7 +19,8 @@ config.read("utils" + os_slash + "config.ini")
 #TODO prettify code in email.py
 #TODO add steam
 #TODO add Amazon
-#TODO fix The Devil In Me
+#TODO fix The Devil In Me 0 price
+#TODO fix dark pictures anthology and symbol issue
 #TODO prettify email (fonts, size, pictures)
 
 #   Loads json of games that need to be in the local games.json
@@ -47,6 +48,8 @@ for game in ps_games:
         game["best price"] = fetch.ps4(game["name"], "best price")
     
     game["base price"] = fetch.ps4(game["name"], "base price")
+    if game["price"] == None:
+        game["price"] = game["base price"]
     old_price = game["price"]
     game["price"], game["price plus"] = fetch.ps4(game["name"])
     if old_price < game["price"]:
@@ -70,6 +73,8 @@ for game in oculus_games:
         game["best price"] = fetch.oculus(game["name"], "best price")
     
     game["base price"] = fetch.oculus(game["name"], "base price")
+    if game["price"] == None:
+        game["price"] = game["base price"]
     old_price = game["price"]
     game["price"] = fetch.oculus(game["name"])
     if old_price < game["price"]:
@@ -91,7 +96,7 @@ if no_ps_deals > 0:
 
 #   Sends message about PS to email
 if no_oculus_deals > 0:
-    email.send(oculus_message, "PS4")
+    email.send(oculus_message, "Oculus")
 
 #   Writes data to json file
 with open(config["GLOBAL"]["RESULT_FILE"], "w") as file:

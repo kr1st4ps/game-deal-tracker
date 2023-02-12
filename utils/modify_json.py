@@ -6,6 +6,7 @@ def update(console, names_json, full_json):
 
     #   Adds new games (if any) to local json
     for game in names_json:
+        print(games_in_full_json)
         if game in games_in_full_json:
             games_in_full_json.remove(game)
         else:
