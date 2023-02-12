@@ -48,11 +48,6 @@ def ps4(game_name, action=None):
             else:
                 price = float(item_json["last_update"]["price"].replace(config["USER DEFINED"]["PSPRICES_CURRENCY"], ""))
                 price_plus = float(item_json["last_update"]["price_plus"].replace(config["USER DEFINED"]["PSPRICES_CURRENCY"], ""))
-                print(game_name)
-                print(str(price) + "    " + str(price_plus))
-                print()
-                print()
-                print()
                 
                 return price, price_plus
 
