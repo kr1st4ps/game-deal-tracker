@@ -2,8 +2,15 @@ from email.message import EmailMessage
 import ssl
 import smtplib
 import configparser
+import os
+
+if os.name == "nt":
+    os_slash = "\\"
+else:
+    os_slash = "/"
+
 config = configparser.ConfigParser()
-config.read("config.ini")
+config.read("utils" + os_slash + "config.ini")
 
 def send(message, console):
     sender = config["USER_DEFINED"]["EMAIL_SENDER"]
