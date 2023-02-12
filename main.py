@@ -23,8 +23,8 @@ config.read("utils" + os_slash + "config.ini")
 #TODO prettify email (fonts, size, pictures)
 
 #   Loads json of games that need to be in the local games.json
-game_list_api = BeautifulSoup(requests.get(config["USER_DEFINED"]["GAME_LIST"]).text, "html.parser")
-game_list = json.load(game_list_api)
+game_list_api = BeautifulSoup(requests.get(config["USER DEFINED"]["GAME_LIST"]).text, "html.parser")
+game_list = json.loads(str(game_list_api))
 ps_game_list = game_list["PS4"]
 oculus_game_list = game_list["Oculus"]
 
