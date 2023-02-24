@@ -15,6 +15,7 @@ else:
 config = configparser.ConfigParser()
 config.read("utils" + os_slash + "config.ini")
 
+#TODO check plus price in ps store
 #TODO shorten the fetching code for each console
 #TODO prettify code in email.py
 #TODO add steam
