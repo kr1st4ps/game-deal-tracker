@@ -45,26 +45,26 @@ oculus_games = modify_json.update("Oculus", oculus_game_list, oculus_games)
 ps_message = "These games from your wishlist have good deals:\n"
 no_ps_deals = 0
 for game in ps_games:
+
+    previous_price = game["price"]
+
+    price, base_price, best_price = fetch.ps4(game["name"], True, True, True)
+
+    game["price"] = price
+    game["base price"] = base_price
     if game["best price"] is None:
-        game["best price"] = fetch.ps4(game["name"], "best price")
-    
-    game["base price"] = fetch.ps4(game["name"], "base price")
-    if game["price"] == None:
-        game["price"] = game["base price"]
-    old_price = game["price"]
-    game["price"], game["price plus"] = fetch.ps4(game["name"])
-    if old_price < game["price"]:
+        game["best price"] = best_price
+
+    if previous_price < price:
         game["notification"] = False
 
-    if game["price"] == game["best price"] and game["price"] != game["base price"] and game["notification"] == False:
+    if game["notification"] == False and game["price"] <= game["best price"]:
         game["notification"] == True
-        ps_message += "\n\t" + game["name"] + " is now " + str(game["price"]) + "\n"
         no_ps_deals += 1
-    elif game["price"] < game["best price"] and game["notification"] == False:
         game["best price"] = game["price"]
-        game["notification"] == True
-        ps_message += "\n\t" + "ALL TIME LOW - " + game["name"] + " is now just " + str(game["price"]) + "\n"
-        no_ps_deals += 1
+        ps_message += "\n\t" + game["name"] + " is now " + str(game["best price"]) + "\n"
+
+    
 
 #   Fetches data for each Oculus game and compiles a message to send to the email
 oculus_message = "These games from your wishlist have good deals:\n"
