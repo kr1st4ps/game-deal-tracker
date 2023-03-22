@@ -21,3 +21,5 @@ To be able to properly use this:
 -   Add support for Amazon (various regions) for PS games
 
 -   Improve email design
+
+-   Fix The Dark Pictures Anthology bugs

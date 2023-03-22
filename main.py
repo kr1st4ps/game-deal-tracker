@@ -15,15 +15,6 @@ else:
 config = configparser.ConfigParser()
 config.read("utils" + os_slash + "config.ini")
 
-#TODO check plus price in ps store
-#TODO shorten the fetching code for each console
-#TODO prettify code in email.py
-#TODO add steam
-#TODO add Amazon
-#TODO fix The Devil In Me 0 price
-#TODO fix dark pictures anthology and symbol issue
-#TODO prettify email (fonts, size, pictures)
-
 #   Loads json of games that need to be in the local games.json
 game_list_api = BeautifulSoup(requests.get(config["USER DEFINED"]["GAME_LIST"]).text, "html.parser")
 game_list = json.loads(str(game_list_api))
