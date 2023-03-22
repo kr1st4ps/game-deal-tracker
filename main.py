@@ -6,6 +6,9 @@ from bs4 import BeautifulSoup
 import utils.modify_json as modify_json
 import configparser 
 import os
+import schedule
+import time
+
 
 def main():
 
@@ -55,5 +58,7 @@ def main():
         json.dump(games, file, indent=2, separators=(',', ': '))
 
 
-if __name__ == "__main__":
-    main()
+schedule.every().hour.do(main)
+while True:
+    schedule.run_pending()
+    time.sleep(1)

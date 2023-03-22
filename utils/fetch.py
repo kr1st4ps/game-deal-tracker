@@ -16,7 +16,7 @@ config = configparser.ConfigParser()
 config.read("utils" + os_slash + "config.ini")
 
 def prices(console, games):
-    #   Fetches data for each PS game and compiles a message to send to the email
+    #   Fetches data for each game and compiles a message to send to the email
     message = "These games from your wishlist have good deals:\n"
     no_deals = 0
     for game in games:
