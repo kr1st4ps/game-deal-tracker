@@ -68,20 +68,40 @@ def ps4(game_name, current_price_trigger=None, base_price_trigger=None, best_pri
             return price, base_price, best_price
 
 
-def oculus(game_name, action=None):
+def oculus(game_name, current_price_trigger=None, base_price_trigger=None, best_price_trigger=None):
+
+    #   Creates a URL with passed game name
     url = config["GLOBAL"]["ODEALS"] + config["GLOBAL"]["ODEALS_QUERY"] + game_name.replace(" ", "+")
+
+    #   Fetches html string from URL
     search = BeautifulSoup(requests.get(url).text, "html.parser")
+
+    #   Looks for the correct game
     for item in search.find_all('div', {'class':'col-xl-2 col-lg-3 col-md-4 col-6 mb-4'}):
         if item.find('span', {'class':'badge badge-pill badge-secondary'}).text == "Quest":
-            if action == "best price" or action == "base price":
+
+            #   Fetches current price and price with PS+ subscription 
+            if current_price_trigger:
+                price = float(item.find('strong', {'class':'text-danger'}).text.replace(" USD", ""))
+            else:
+                price = None
+
+            #   Fetches lowest price the game has ever been
+            if base_price_trigger or best_price_trigger:
+                base_price, best_price = None
+
+                #   Opens games page
                 url = item.find('a', {'class':'game-item'})["href"]
                 game_page = BeautifulSoup(requests.get(url).text, "html.parser")
-                if action == "base price":
+
+                if base_price_trigger:
                     prices = []
                     for item in game_page.find('div', {'class': 'col-lg-4 col-md-5 col-12'}).find_all(text=re.compile(r".* USD$")):
                         prices.append(float(item.replace(" USD", "")))
-                    return max(prices)
-                elif action == "best price":
-                    return float(game_page.find_all('div', {'class': 'col-4 text-center'})[1].find('strong', {'class': 'text-success h4'}).text.strip().replace(" USD", ""))
-            else:
-                return float(item.find('strong', {'class':'text-danger'}).text.replace(" USD", ""))
+                    base_price = max(prices)
+
+                if best_price_trigger:
+                    best_price = float(game_page.find_all('div', {'class': 'col-4 text-center'})[1].find('strong', {'class': 'text-success h4'}).text.strip().replace(" USD", ""))
+
+
+            return price, base_price, best_price

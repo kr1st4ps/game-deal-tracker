@@ -70,26 +70,24 @@ for game in ps_games:
 oculus_message = "These games from your wishlist have good deals:\n"
 no_oculus_deals = 0
 for game in oculus_games:
+    previous_price = game["price"]
+
+    price, base_price, best_price = fetch.oculus(game["name"], True, True, True)
+
+    game["price"] = price
+    game["base price"] = base_price
     if game["best price"] is None:
-        game["best price"] = fetch.oculus(game["name"], "best price")
-    
-    game["base price"] = fetch.oculus(game["name"], "base price")
-    if game["price"] == None:
-        game["price"] = game["base price"]
-    old_price = game["price"]
-    game["price"] = fetch.oculus(game["name"])
-    if old_price < game["price"]:
+        game["best price"] = best_price
+
+    if previous_price < price:
         game["notification"] = False
 
-    if game["price"] == game["best price"] and game["price"] != game["base price"] and game["notification"] == False:
+    if game["notification"] == False and game["price"] <= game["best price"]:
         game["notification"] == True
-        oculus_message += "\n\t" + game["name"] + " is now " + str(game["price"]) + "\n"
         no_oculus_deals += 1
-    elif game["price"] < game["best price"] and game["notification"] == False:
         game["best price"] = game["price"]
-        game["notification"] == True
-        oculus_message += "\n\t" + "ALL TIME LOW - " + game["name"] + " is now just " + str(game["price"]) + "\n"
-        no_oculus_deals += 1
+        oculus_message += "\n\t" + game["name"] + " is now " + str(game["best price"]) + "\n"
+
 
 #   Sends message about PS to email
 if no_ps_deals > 0:
