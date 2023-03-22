@@ -43,7 +43,7 @@ def ps4(game_name, current_price_trigger=None, base_price_trigger=None, best_pri
             
             #   Fetches lowest price the game has ever been
             if base_price_trigger or best_price_trigger:
-                base_price, best_price = None
+                base_price = best_price = None
 
                 #   Opens games page
                 url = config["GLOBAL"]["PSPRICES"] + ps_data["url"]
@@ -57,12 +57,12 @@ def ps4(game_name, current_price_trigger=None, base_price_trigger=None, best_pri
                     if best_price_trigger:
                         best_price = float(prices[1].replace(config["USER DEFINED"]["PSPRICES_CURRENCY"], ""))
                     if base_price_trigger:
-                        best_price = float(prices[0].replace(config["USER DEFINED"]["PSPRICES_CURRENCY"], ""))
+                        base_price = float(prices[0].replace(config["USER DEFINED"]["PSPRICES_CURRENCY"], ""))
                 else:
                     if best_price_trigger:
                         best_price = float(prices[2].replace(config["USER DEFINED"]["PSPRICES_CURRENCY"], ""))
                     if base_price_trigger:
-                        best_price = float(prices[1].replace(config["USER DEFINED"]["PSPRICES_CURRENCY"], ""))
+                        base_price = float(prices[1].replace(config["USER DEFINED"]["PSPRICES_CURRENCY"], ""))
 
             
             return price, base_price, best_price
@@ -88,7 +88,7 @@ def oculus(game_name, current_price_trigger=None, base_price_trigger=None, best_
 
             #   Fetches lowest price the game has ever been
             if base_price_trigger or best_price_trigger:
-                base_price, best_price = None
+                base_price = best_price = None
 
                 #   Opens games page
                 url = item.find('a', {'class':'game-item'})["href"]
