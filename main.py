@@ -58,8 +58,7 @@ def main():
         json.dump(games, file, indent=2, separators=(',', ': '))
 
 
-"""schedule.every().hour.at(":05").do(main)
+schedule.every().hour.at(":05").do(main)
 while True:
     schedule.run_pending()
-    time.sleep(1)"""
-main()
+    time.sleep(1)
