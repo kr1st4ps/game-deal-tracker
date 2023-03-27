@@ -21,6 +21,7 @@ def remove(name, games):
     for i in range(len(games)):
         if games[i]["name"] == name:
             games.pop(i)
+            break
 
     return games
 

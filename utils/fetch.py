@@ -33,7 +33,7 @@ def prices(console, games):
         if game["best price"] is None:
             game["best price"] = best_price
 
-        if previous_price < price:
+        if previous_price is not None and previous_price < price:
             game["notification"] = False
 
         if game["notification"] == False and game["price"] <= game["best price"]:
