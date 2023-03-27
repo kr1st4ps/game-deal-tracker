@@ -1,41 +1,71 @@
 {
   "PS4": [
     {
+      "name": "Blade Runner Enhanced Edition",
+      "price": 3.99,
+      "best price": 3.99,
+      "base price": 7.99,
+      "notification": true
+    },
+    {
+      "name": "World War Z",
+      "price": 24.99,
+      "best price": 6.24,
+      "base price": 20.79,
+      "notification": false
+    },
+    {
       "name": "Canis Canem Edit",
       "price": 11.99,
-      "price plus": 11.99,
       "best price": 4.99,
       "base price": 11.99,
       "notification": false
     },
     {
+      "name": "Dayz",
+      "price": 44.99,
+      "best price": 19.99,
+      "base price": 44.99,
+      "notification": false
+    },
+    {
       "name": "Evil West",
-      "price": 37.49,
-      "price plus": 37.49,
+      "price": 49.99,
       "best price": 37.49,
       "base price": 49.99,
       "notification": false
     },
     {
       "name": "God Of War Ragnar\u00f6k",
-      "price": 69.99,
-      "price plus": 69.99,
-      "best price": 69.99,
-      "base price": 69.99,
-      "notification": false
+      "price": 59.99,
+      "best price": 59.99,
+      "base price": 59.99,
+      "notification": true
     },
     {
       "name": "Marvel's Midnight Suns",
       "price": 59.99,
-      "price plus": 59.99,
       "best price": 59.99,
       "base price": 59.99,
+      "notification": true
+    },
+    {
+      "name": "Sherlock Holmes Chapter One",
+      "price": 36.99,
+      "best price": 14.79,
+      "base price": 36.99,
+      "notification": false
+    },
+    {
+      "name": "Sherlock Holmes: Crimes And Punishments + Sherlock Holmes: The Devil's Daughter Bundle",
+      "price": 53.99,
+      "best price": 10.79,
+      "base price": 53.99,
       "notification": false
     },
     {
       "name": "Star Wars Heritage Pack",
       "price": 39.99,
-      "price plus": 39.99,
       "best price": 15.99,
       "base price": 39.99,
       "notification": false
@@ -43,23 +73,20 @@
     {
       "name": "Superliminal",
       "price": 16.99,
-      "price plus": 16.99,
       "best price": 8.49,
       "base price": 16.99,
       "notification": false
     },
     {
-      "name": "The Callisto Protocol",
-      "price": 54.99,
-      "price plus": 54.99,
-      "best price": 43.99,
-      "base price": 54.99,
+      "name": "The Callisto Protocol PS4",
+      "price": 49.99,
+      "best price": 39.99,
+      "base price": 49.99,
       "notification": false
     },
     {
       "name": "The Evil Within",
       "price": 3.99,
-      "price plus": 3.99,
       "best price": 3.19,
       "base price": 15.99,
       "notification": false
@@ -67,28 +94,103 @@
     {
       "name": "The Evil Within 2",
       "price": 34.99,
-      "price plus": 34.99,
       "best price": 5.24,
       "base price": 34.99,
-      "notification": false
-    },
-    {
-      "name": "The Quarry For PS4",
-      "price": 29.99,
-      "price plus": 29.99,
-      "best price": 19.79,
-      "base price": 59.99,
-      "notification": false
-    },
-    {
-      "name": "World War Z",
-      "price": 24.99,
-      "price plus": 24.99,
-      "best price": 6.24,
-      "base price": 24.99,
       "notification": false
     }
   ],
   "Steam": [],
-  "Oculus": []
+  "Oculus": [
+    {
+      "name": "I Expect You To Die",
+      "price": 24.99,
+      "best price": 15.99,
+      "base price": 24.99,
+      "notification": false
+    },
+    {
+      "name": "Red Matter",
+      "price": 24.99,
+      "best price": 12.49,
+      "base price": 24.99,
+      "notification": false
+    },
+    {
+      "name": "Drunkn Bar Fight",
+      "price": 17.99,
+      "best price": 9.99,
+      "base price": 17.99,
+      "notification": false
+    },
+    {
+      "name": "I Expect You To Die 2",
+      "price": 24.99,
+      "best price": 15.99,
+      "base price": 24.99,
+      "notification": false
+    },
+    {
+      "name": "Keep Talking and Nobody Explodes",
+      "price": 14.99,
+      "best price": 8.99,
+      "base price": 14.99,
+      "notification": false
+    },
+    {
+      "name": "Onward",
+      "price": 18.99,
+      "best price": 14.99,
+      "base price": 24.99,
+      "notification": false
+    },
+    {
+      "name": "Paranormal Activity: The Lost Soul",
+      "price": 19.99,
+      "best price": 13.99,
+      "base price": 19.99,
+      "notification": false
+    },
+    {
+      "name": "Please, Don't Touch Anything",
+      "price": 9.99,
+      "best price": 5.99,
+      "base price": 9.99,
+      "notification": false
+    },
+    {
+      "name": "Red Matter 2",
+      "price": 26.99,
+      "best price": 26.99,
+      "base price": 26.99,
+      "notification": true
+    },
+    {
+      "name": "The Exorcist: Legion VR",
+      "price": 24.99,
+      "best price": 14.99,
+      "base price": 24.99,
+      "notification": false
+    },
+    {
+      "name": "The Room VR: A Dark Matter",
+      "price": 29.99,
+      "best price": 17.99,
+      "base price": 29.99,
+      "notification": false
+    },
+    {
+      "name": "The Walking Dead: Saints &amp; Sinners",
+      "price": 39.99,
+      "best price": 19.99,
+      "base price": 39.99,
+      "notification": false
+    },
+    {
+      "name": "The Walking Dead: Saints &amp; Sinners - Chapter 2: Retribution",
+      "price": 39.99,
+      "best price": 19.99,
+      "base price": 39.99,
+      "notification": false
+    }
+  ]
 }

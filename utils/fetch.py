@@ -32,17 +32,16 @@ def prices(console, games):
         game["base price"] = base_price
         if game["best price"] is None:
             game["best price"] = best_price
-
         if previous_price is not None and previous_price < price:
             game["notification"] = False
 
         if game["notification"] == False and game["price"] <= game["best price"]:
-            game["notification"] == True
+            game["notification"] = True
             no_deals += 1
             game["best price"] = game["price"]
             message += "\n\t" + game["name"] + " is now " + str(game["best price"]) + "\n"
 
-    return no_deals, message
+    return no_deals, message, games
 
 #   Other item tags in psprices website
     #name = ps_data["name"]
@@ -54,14 +53,18 @@ def prices(console, games):
     #price_full = float(ps_data["last_update"]["price_old"].replace(config["GLOBAL"]["PSPRICES_CURRENCY"], ""))
 def ps4(game_name, current_price_trigger=None, base_price_trigger=None, best_price_trigger=None):
     #   Creates a URL with passed game name
-    url = config["GLOBAL"]["PSPRICES"] + config["USER DEFINED"]["PSPRICES_REGION"] + config["GLOBAL"]["PSPRICES_QUERY"] + game_name.replace(" ", "+")
+    url = config["GLOBAL"]["PSPRICES"] + config["USER DEFINED"]["PSPRICES_REGION"] + config["GLOBAL"]["PSPRICES_QUERY"] + game_name.replace(" ", "+") + "&platform=" + config["USER DEFINED"]["PSPRICES_PLATFORM"]
 
     #   Fetches html string from URL
     search = BeautifulSoup(requests.get(url).text, "html.parser")
 
     #   Looks for the correct game
     for item in search.find_all('div', {'class':'component--game-card col-span-6 sm:col-span-4 md:col-span-3 lg:col-span-3 xl:col-span-2'}):
-        ps_data = json.loads(item["data-props"])
+        if json.loads(item["data-props"])["top_category"] == "game":
+            ps_data = json.loads(item["data-props"])
+        else:
+            continue
+        
         if ps_data["name"].lower() == game_name.lower():
 
             #   Fetches current price and price with PS+ subscription 
@@ -93,7 +96,6 @@ def ps4(game_name, current_price_trigger=None, base_price_trigger=None, best_pri
                     if base_price_trigger:
                         base_price = float(prices[1].replace(config["USER DEFINED"]["PSPRICES_CURRENCY"], ""))
 
-            
             return price, base_price, best_price
 
 

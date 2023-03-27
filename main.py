@@ -40,14 +40,14 @@ def main():
     oculus_games = modify_json.update("Oculus", oculus_game_list, oculus_games)
 
     #   Fetches data for each PS game and compiles a message to send to the email
-    no_ps_deals, ps_message = fetch.prices("PS4", ps_games)
+    no_ps_deals, ps_message, ps_games = fetch.prices("PS4", ps_games)
 
     #   Sends message about PS to email
     if no_ps_deals > 0:
         email.send(ps_message, "PS4")
 
     #   Fetches data for each Oculus game and compiles a message to send to the email
-    no_oculus_deals, oculus_message = fetch.prices("Oculus", oculus_games)
+    no_oculus_deals, oculus_message, oculus_games = fetch.prices("Oculus", oculus_games)
 
     #   Sends message about PS to email
     if no_oculus_deals > 0:
