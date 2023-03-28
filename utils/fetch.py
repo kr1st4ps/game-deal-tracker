@@ -4,6 +4,8 @@ import json
 import re
 import configparser
 import os
+import logging
+import utils.email as email
 
 #   Checks which OS
 if os.name == "nt":
@@ -15,18 +17,38 @@ else:
 config = configparser.ConfigParser()
 config.read("utils" + os_slash + "config.ini")
 
+#   Sets up logging
+logging.basicConfig(filename="logs.log",
+                    filemode='a',
+                    format='%(levelname)s:%(asctime)s:%(message)s',
+                    datefmt='%H:%M:%S',
+                    level=logging.INFO)
+
+
 def prices(console, games):
     #   Fetches data for each game and compiles a message to send to the email
     message = "These games from your wishlist have good deals:\n"
     no_deals = 0
     for game in games:
 
+        logging.info("Fetching price for {} from {} store".format(game["name"], console))
+
         previous_price = game["price"]
 
         if console == "PS4":
-            price, base_price, best_price = ps4(game["name"], True, True, True)
+            try:
+                price, base_price, best_price = ps4(game["name"], True, True, True)
+            except Exception as e:
+                logging.error("Encountered exception -{}- for {} of {}".format(e, game["name"], console))
+                email.send(game["name"], "error")
+                continue
         elif console == "Oculus":
-            price, base_price, best_price = oculus(game["name"], True, True, True)
+            try:
+                price, base_price, best_price = oculus(game["name"], True, True, True)
+            except Exception as e:
+                logging.error("Encountered exception -{}- for {} of {}".format(e, game["name"], console))
+                email.send(game["name"], "error")
+                continue
 
         game["price"] = price
         game["base price"] = base_price

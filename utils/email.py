@@ -12,16 +12,18 @@ else:
 config = configparser.ConfigParser()
 config.read("utils" + os_slash + "config.ini")
 
-def send(message, console):
+def send(message, type):
     sender = config["USER DEFINED"]["EMAIL_SENDER"]
     password = config["USER DEFINED"]["EMAIL_PASSWORD"]
 
     receiver = config["USER DEFINED"]["EMAIL_RECEIVER"]
 
-    if console == "PS4":
+    if type == "PS4":
         subject = "New PS4 game deals you might like..."
-    elif console == "Oculus":
+    elif type == "Oculus":
         subject = "New Quest game deals you might like..."
+    elif type == "error":
+        subject = "Encountered exception"
 
 
     body = message
