@@ -6,6 +6,7 @@ import configparser
 import os
 import logging
 import utils.email as email
+import time
 
 #   Checks which OS
 if os.name == "nt":
@@ -21,7 +22,7 @@ config.read("utils" + os_slash + "config.ini")
 logging.basicConfig(filename="logs.log",
                     filemode='a',
                     format='%(levelname)s:%(asctime)s:%(message)s',
-                    datefmt='%H:%M:%S',
+                    datefmt='%Y-%m-%d %H:%M:%S',
                     level=logging.INFO)
 
 
@@ -78,7 +79,7 @@ def ps4(game_name, current_price_trigger=None, base_price_trigger=None, best_pri
     url = config["GLOBAL"]["PSPRICES"] + config["USER DEFINED"]["PSPRICES_REGION"] + config["GLOBAL"]["PSPRICES_QUERY"] + game_name.replace(" ", "+") + "&platform=" + config["USER DEFINED"]["PSPRICES_PLATFORM"]
 
     #   Fetches html string from URL
-    search = BeautifulSoup(requests.get(url).text, "html.parser")
+    search = BeautifulSoup(conn(url, game_name), "html.parser")
 
     #   Looks for the correct game
     for item in search.find_all('div', {'class':'component--game-card col-span-6 sm:col-span-4 md:col-span-3 lg:col-span-3 xl:col-span-2'}):
@@ -101,7 +102,7 @@ def ps4(game_name, current_price_trigger=None, base_price_trigger=None, best_pri
 
                 #   Opens games page
                 url = config["GLOBAL"]["PSPRICES"] + ps_data["url"]
-                game_page = BeautifulSoup(requests.get(url).text, "html.parser")
+                game_page = BeautifulSoup(conn(url, game_name), "html.parser")
 
                 #   Finds all prices in html string
                 prices = game_page.find_all(text=re.compile("^\{}".format(config["USER DEFINED"]["PSPRICES_CURRENCY"])))
@@ -127,7 +128,7 @@ def oculus(game_name, current_price_trigger=None, base_price_trigger=None, best_
     url = config["GLOBAL"]["ODEALS"] + config["GLOBAL"]["ODEALS_QUERY"] + game_name.replace(" ", "+")
 
     #   Fetches html string from URL
-    search = BeautifulSoup(requests.get(url).text, "html.parser")
+    search = BeautifulSoup(conn(url, game_name), "html.parser")
 
     #   Looks for the correct game
     for item in search.find_all('div', {'class':'col-xl-2 col-lg-3 col-md-4 col-6 mb-4'}):
@@ -145,7 +146,7 @@ def oculus(game_name, current_price_trigger=None, base_price_trigger=None, best_
 
                 #   Opens games page
                 url = item.find('a', {'class':'game-item'})["href"]
-                game_page = BeautifulSoup(requests.get(url).text, "html.parser")
+                game_page = BeautifulSoup(conn(url, game_name), "html.parser")
 
                 if base_price_trigger:
                     prices = []
@@ -158,3 +159,16 @@ def oculus(game_name, current_price_trigger=None, base_price_trigger=None, best_
 
 
             return price, base_price, best_price
+
+    
+def conn(url, name):
+    while True:    
+        try:
+            html = requests.get(url)
+            break
+        except:
+            time.sleep(60)
+            logging.error("Trying to fetch again - {}".format(name))
+            continue
+
+    return html.text
