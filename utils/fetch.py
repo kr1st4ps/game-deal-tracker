@@ -29,6 +29,7 @@ logging.basicConfig(filename="logs.log",
 def prices(console, games):
     #   Fetches data for each game and compiles a message to send to the email
     message = "These games from your wishlist have good deals:\n"
+    error_msg = ""
     no_deals = 0
     for game in games:
 
@@ -40,15 +41,17 @@ def prices(console, games):
             try:
                 price, base_price, best_price = ps4(game["name"], True, True, True)
             except Exception as e:
-                logging.error("Encountered exception -{}- for {} of {}".format(e, game["name"], console))
-                email.send(game["name"], "error")
+                error_txt = "Encountered exception -{}- for {} of {}".format(e, game["name"], console)
+                logging.error(error_txt)
+                error_msg += error_txt + "\n\n"
                 continue
         elif console == "Oculus":
             try:
                 price, base_price, best_price = oculus(game["name"], True, True, True)
             except Exception as e:
-                logging.error("Encountered exception -{}- for {} of {}".format(e, game["name"], console))
-                email.send(game["name"], "error")
+                error_txt = "Encountered exception -{}- for {} of {}".format(e, game["name"], console)
+                logging.error(error_txt)
+                error_msg += error_txt + "\n\n"
                 continue
 
         game["price"] = price
@@ -63,6 +66,9 @@ def prices(console, games):
             no_deals += 1
             game["best price"] = game["price"]
             message += "\n\t" + game["name"] + " is now " + str(game["best price"]) + "\n"
+
+        if len(error_msg) > 0:
+            email.send(error_msg, "error")
 
     return no_deals, message, games
 
