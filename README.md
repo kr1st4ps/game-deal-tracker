@@ -27,3 +27,5 @@ To be able to properly use this:
 -   Fix Sifu showing deluxe edition price
 
 -   Fix Walking Dead 2 price not showing
+
+-   Midnight suns removed from PS store
