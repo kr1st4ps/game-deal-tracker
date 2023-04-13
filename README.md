@@ -20,12 +20,8 @@ To be able to properly use this:
 
 -   Improve email design
 
--   Fix The Dark Pictures Anthology bugs
-
 -   Fix incorrect base price for - Callisto Protocol, Evil Within 2, RE5, RE6
 
 -   Fix Sifu showing deluxe edition price
 
 -   Fix Walking Dead 2 price not showing
-
--   Midnight suns removed from PS store
