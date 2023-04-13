@@ -39,7 +39,15 @@ def prices(console, games):
 
         if console == "PS4":
             try:
-                price, base_price, best_price = ps4(game["name"], True, True, True)
+                price, base_price, best_price = ps(game["name"], console, True, True, True)
+            except Exception as e:
+                error_txt = "Encountered exception -{}- for {} of {}".format(e, game["name"], console)
+                logging.error(error_txt)
+                error_msg += error_txt + "\n\n"
+                continue
+        if console == "PS5":
+            try:
+                price, base_price, best_price = ps(game["name"], console, True, True, True)
             except Exception as e:
                 error_txt = "Encountered exception -{}- for {} of {}".format(e, game["name"], console)
                 logging.error(error_txt)
@@ -80,9 +88,9 @@ def prices(console, games):
     #cover_url = ps_data["cover"]
     #discount = ps_data["last_update"]["discount_percent"]
     #price_full = float(ps_data["last_update"]["price_old"].replace(config["GLOBAL"]["PSPRICES_CURRENCY"], ""))
-def ps4(game_name, current_price_trigger=None, base_price_trigger=None, best_price_trigger=None):
+def ps(game_name, console, current_price_trigger=None, base_price_trigger=None, best_price_trigger=None):
     #   Creates a URL with passed game name
-    url = config["GLOBAL"]["PSPRICES"] + config["USER DEFINED"]["PSPRICES_REGION"] + config["GLOBAL"]["PSPRICES_QUERY"] + game_name.replace(" ", "+") + "&platform=" + config["USER DEFINED"]["PSPRICES_PLATFORM"]
+    url = config["GLOBAL"]["PSPRICES"] + config["USER DEFINED"]["PSPRICES_REGION"] + config["GLOBAL"]["PSPRICES_QUERY"] + game_name.replace(" ", "+") + "&platform=" + console
 
     #   Fetches html string from URL
     search = BeautifulSoup(conn(url, game_name), "html.parser")

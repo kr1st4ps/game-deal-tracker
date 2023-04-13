@@ -25,26 +25,32 @@ def main():
     #   Loads json of games that need to be in the local games.json
     game_list_api = BeautifulSoup(requests.get(config["USER DEFINED"]["GAME_LIST"]).text, "html.parser")
     game_list = json.loads(str(game_list_api))
-    ps_game_list = game_list["PS4"]
+    ps4_game_list = game_list["PS4"]
+    ps5_game_list = game_list["PS5"]
     oculus_game_list = game_list["Oculus"]
 
     #   Opens local games.json file
     with open(config["GLOBAL"]["RESULT_FILE"], "r") as file:
         games = json.load(file)
-    ps_games = games["PS4"]
+    ps4_games = games["PS4"]
+    ps5_games = games["PS5"]
     oculus_games = games["Oculus"]
     #steam_games = games["Steam"]
 
     #   Updates local games.json
-    ps_games = modify_json.update("PS4", ps_game_list, ps_games)
+    ps4_games = modify_json.update("PS4", ps4_game_list, ps4_games)
+    ps5_games = modify_json.update("PS5", ps5_game_list, ps5_games)
     oculus_games = modify_json.update("Oculus", oculus_game_list, oculus_games)
 
     #   Fetches data for each PS game and compiles a message to send to the email
-    no_ps_deals, ps_message, ps_games = fetch.prices("PS4", ps_games)
+    no_ps4_deals, ps4_message, ps4_games = fetch.prices("PS4", ps4_games)
+    no_ps5_deals, ps5_message, ps5_games = fetch.prices("PS5", ps5_games)
 
     #   Sends message about PS to email
-    if no_ps_deals > 0:
-        email.send(ps_message, "PS4")
+    if no_ps4_deals > 0:
+        email.send(ps4_message, "PS4")
+    if no_ps5_deals > 0:
+        email.send(ps5_message, "PS5")
 
     #   Fetches data for each Oculus game and compiles a message to send to the email
     no_oculus_deals, oculus_message, oculus_games = fetch.prices("Oculus", oculus_games)
