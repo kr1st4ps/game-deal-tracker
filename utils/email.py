@@ -20,6 +20,8 @@ def send(message, type):
 
     if type == "PS4":
         subject = "New PS4 game deals you might like..."
+    if type == "PS5":
+        subject = "New PS5 game deals you might like..."
     elif type == "Oculus":
         subject = "New Quest game deals you might like..."
     elif type == "error":
