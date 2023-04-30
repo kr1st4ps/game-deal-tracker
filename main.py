@@ -23,7 +23,13 @@ def main():
     config.read("utils" + os_slash + "config.ini")
 
     #   Loads json of games that need to be in the local games.json
-    game_list_api = BeautifulSoup(requests.get(config["USER DEFINED"]["GAME_LIST"]).text, "html.parser")
+    while True:    
+        try:
+            game_list_api = BeautifulSoup(requests.get(config["USER DEFINED"]["GAME_LIST"]).text, "html.parser")
+            break
+        except:
+            time.sleep(60)
+            continue
     game_list = json.loads(str(game_list_api))
     ps4_game_list = game_list["PS4"]
     ps5_game_list = game_list["PS5"]
