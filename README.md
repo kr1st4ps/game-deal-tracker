@@ -16,11 +16,7 @@ To be able to properly use this:
 
 -   Make it so there is no need to have the exact name of the game
 
--   Add support for Amazon (various regions) for PS games
-
 -   Improve email design
-
--   Fix incorrect base price for - Callisto Protocol, Evil Within 2, RE5, RE6
 
 -   Fix Sifu showing deluxe edition price
 
