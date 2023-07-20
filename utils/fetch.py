@@ -37,22 +37,13 @@ def prices(console, games):
 
         previous_price = game["price"]
 
-        if console == "PS4":
+        if console == "PS4" or console == "PS%":
             try:
                 price, base_price, best_price = ps(game["name"], console, True, True, True)
             except Exception as e:
                 error_txt = "Encountered exception -{}- for {} of {}".format(e, game["name"], console)
                 logging.error(error_txt)
                 error_msg += error_txt + "\n\n"
-                continue
-        if console == "PS5":
-            try:
-                price, base_price, best_price = ps(game["name"], console, True, True, True)
-            except Exception as e:
-                error_txt = "Encountered exception -{}- for {} of {}".format(e, game["name"], console)
-                logging.error(error_txt)
-                error_msg += error_txt + "\n\n"
-                continue
         elif console == "Oculus":
             try:
                 price, base_price, best_price = oculus(game["name"], True, True, True)
@@ -148,7 +139,7 @@ def oculus(game_name, current_price_trigger=None, base_price_trigger=None, best_
     for item in search.find_all('div', {'class':'col-xl-2 col-lg-3 col-md-4 col-6 mb-4'}):
         if item.find('span', {'class':'badge badge-pill badge-secondary'}).text == "Quest":
 
-            #   Fetches current price and price with PS+ subscription 
+            #   Fetches current price
             if current_price_trigger:
                 price = float(item.find('strong', {'class':'text-danger'}).text.replace(" USD", ""))
             else:

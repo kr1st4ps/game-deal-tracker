@@ -27,14 +27,11 @@ def send(message, type):
     elif type == "error":
         subject = "Encountered exception"
 
-
-    body = message
-
     em = EmailMessage()
     em['From'] = sender
     em['To'] = receiver
     em['Subject'] = subject
-    em.set_content(body)
+    em.set_content(message)
 
     context = ssl.create_default_context()
 

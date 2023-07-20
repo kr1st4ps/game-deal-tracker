@@ -41,7 +41,6 @@ def main():
     ps4_games = games["PS4"]
     ps5_games = games["PS5"]
     oculus_games = games["Oculus"]
-    #steam_games = games["Steam"]
 
     #   Updates local games.json
     ps4_games = modify_json.update("PS4", ps4_game_list, ps4_games)

@@ -12,10 +12,6 @@ To be able to properly use this:
 
 # TO DOs
 
--   Add support for steam store
-
--   Make it so there is no need to have the exact name of the game
-
 -   Improve email design
 
 -   Fix Sifu showing deluxe edition price
