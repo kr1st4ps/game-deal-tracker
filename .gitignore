@@ -1,2 +1,5 @@
 config.ini
 games.json
+__pycache__
+.DS_Store
+logs.log
