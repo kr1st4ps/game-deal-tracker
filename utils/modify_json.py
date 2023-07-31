@@ -31,8 +31,7 @@ def add(name, games, console):
         "name": name,
         "price": None,
         "best price": None,
-        "base price": None,
-        "notification": False
+        "full price": None
     }
     
     games.append(new_data)
