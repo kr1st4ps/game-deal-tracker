@@ -43,6 +43,7 @@ def prices(console, games):
                 error_txt = "Encountered exception -{}- for {} of {}".format(e, game["name"], console)
                 logging.error(error_txt)
                 error_msg += error_txt + "\n\n"
+                continue
         """elif console == "Oculus":
             try:
                 price, base_price, best_price = oculus(game["name"], True, True, True)
@@ -53,13 +54,16 @@ def prices(console, games):
                 continue"""
 
         #   Updates json
-        game["price"] = price
-        game["full price"] = full_price
+        game["price"] = float(price)
+        game["full price"] = float(full_price)
 
         if game["best price"] is None:
-            game["best price"] = price
+            game["best price"] = float(price)
 
-        if price < previous_price:
+        if previous_price is None:
+            previous_price = float(full_price)
+
+        if float(price) < float(previous_price):
             game["notification"] = True
             no_deals += 1
             game["best price"] = game["price"]
@@ -82,35 +86,42 @@ def ps(game_name, console):
     search = BeautifulSoup(conn(url, game_name), "html.parser")
 
     #   Looks for the correct game
+    game = None
     for item in search.find_all('li', {'class':''}):
 
         #   Checks name, console, and type
         try:
-            name = item.find('span', {"class":'psw-t-body psw-c-t-1 psw-t-truncate-2 psw-m-b-2'})
+            name = item.find('span', {"class":'psw-t-body psw-c-t-1 psw-t-truncate-2 psw-m-b-2'}).text.strip()
             consoles = [tag.text for tag in item.find_all('span', {"class":'psw-platform-tag psw-p-x-2 psw-l-line-left psw-t-tag psw-on-graphic'})]
             try:
                 product_type = item.find('span', {"class":'psw-product-tile__product-type psw-t-bold psw-t-size-1 psw-t-truncate-1 psw-c-t-2 psw-t-uppercase psw-m-b-1'})
             except:
                 product_type = None
 
-            if name.text != game_name or console not in consoles or product_type is not None:
+            if name != game_name or console not in consoles:
                 continue
+            else:
+                game = item
+                if product_type is not None:
+                    continue
+                else:
+                    break
 
         except:
             continue
       
-        #   Finds current price
-        price = item.find('span', {"class":'psw-m-r-3'})
+    #   Finds current price
+    price = game.find('span', {"class":'psw-m-r-3'}).text
 
-        # Finds discount and full price (if the game is discounted)
-        try:
-            discount = item.find('span', {"class":'psw-body-2 psw-badge__text psw-badge--none psw-text-bold psw-p-y-0 psw-p-2 psw-r-1 psw-l-anchor'})
-            full_price = item.find('s', {"class":'psw-c-t-2'})
-        except:
-            discount = None
-            full_price = price
+    # Finds discount and full price (if the game is discounted)
+    try:
+        discount = game.find('span', {"class":'psw-body-2 psw-badge__text psw-badge--none psw-text-bold psw-p-y-0 psw-p-2 psw-r-1 psw-l-anchor'}).text
+        full_price = game.find('s', {"class":'psw-c-t-2'}).text
+    except:
+        discount = None
+        full_price = price
 
-    return price, discount, full_price
+    return price[1:], discount, full_price[1:]
 
 
 def oculus(game_name, current_price_trigger=None, base_price_trigger=None, best_price_trigger=None):
