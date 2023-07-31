@@ -1,6 +1,7 @@
 # Game deal tracker
 
-This code will take a list of games you want (PS and Oculus store games for now), and check the current price in the respective store every hour. Depending on the price and price history, an email will be sent to you if the current discount on the game is good.
+This code will take a list of games you want (PS store games for now, Oculus store to be readded soon), and check the current price in the respective store every hour.
+If and when the game is discounted or has a different full price than before, you will be notified via email.
 
 To be able to properly use this:
 
@@ -13,7 +14,3 @@ To be able to properly use this:
 # TO DOs
 
 -   Improve email design
-
--   Fix Sifu showing deluxe edition price
-
--   Fix Walking Dead 2 price not showing
