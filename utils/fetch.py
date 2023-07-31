@@ -54,7 +54,7 @@ def prices(console, games):
 
         #   Updates json
         game["price"] = price
-        game["base price"] = base_price
+        game["full price"] = full_price
 
         if game["best price"] is None:
             game["best price"] = price
@@ -64,7 +64,7 @@ def prices(console, games):
             no_deals += 1
             game["best price"] = game["price"]
             if discount == None:
-                message += "\n\t" + game["name"] + " base price has been lowered to " + config["USER DEFINED"]["PSSTORE_CURRENCY"] + str(full_price) + "!\n"
+                message += "\n\t" + game["name"] + " full price has been lowered to " + config["USER DEFINED"]["PSSTORE_CURRENCY"] + str(full_price) + "!\n"
             else:
                 message += "\n\t" + game["name"] + " is now discounted by " + discount + " and is " + config["USER DEFINED"]["PSSTORE_CURRENCY"] + str(price) + "!\n"
 
