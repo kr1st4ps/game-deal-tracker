@@ -43,14 +43,14 @@ def prices(console, games):
                 error_txt = "Encountered exception -{}- for {} of {}".format(e, game["name"], console)
                 logging.error(error_txt)
                 error_msg += error_txt + "\n\n"
-        elif console == "Oculus":
+        """elif console == "Oculus":
             try:
                 price, base_price, best_price = oculus(game["name"], True, True, True)
             except Exception as e:
                 error_txt = "Encountered exception -{}- for {} of {}".format(e, game["name"], console)
                 logging.error(error_txt)
                 error_msg += error_txt + "\n\n"
-                continue
+                continue"""
 
         #   Updates json
         game["price"] = price

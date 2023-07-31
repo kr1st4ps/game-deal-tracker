@@ -57,12 +57,12 @@ def main():
     if no_ps5_deals > 0:
         email.send(ps5_message, "PS5")
 
-    #   Fetches data for each Oculus game and compiles a message to send to the email
+    """#   Fetches data for each Oculus game and compiles a message to send to the email
     no_oculus_deals, oculus_message, oculus_games = fetch.prices("Oculus", oculus_games)
 
     #   Sends message about PS to email
     if no_oculus_deals > 0:
-        email.send(oculus_message, "Oculus")
+        email.send(oculus_message, "Oculus")"""
 
     #   Writes data to json file
     with open(config["GLOBAL"]["RESULT_FILE"], "w") as file:
