@@ -72,8 +72,8 @@ def prices(console, games):
             else:
                 message += "\n\t" + game["name"] + " is now discounted by " + discount + " and is " + config["USER DEFINED"]["PSSTORE_CURRENCY"] + str(price) + "!\n"
 
-        if len(error_msg) > 0:
-            email.send(error_msg, "error")
+    if len(error_msg) > 0:
+        email.send(error_msg, "error")
 
     return no_deals, message, games
 
