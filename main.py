@@ -33,19 +33,19 @@ def main():
     game_list = json.loads(str(game_list_api))
     ps4_game_list = game_list["PS4"]
     ps5_game_list = game_list["PS5"]
-    oculus_game_list = game_list["Oculus"]
+    #oculus_game_list = game_list["Oculus"]
 
     #   Opens local games.json file
     with open(config["GLOBAL"]["RESULT_FILE"], "r") as file:
         games = json.load(file)
     ps4_games = games["PS4"]
     ps5_games = games["PS5"]
-    oculus_games = games["Oculus"]
+    #oculus_games = games["Oculus"]
 
     #   Updates local games.json
     ps4_games = modify_json.update("PS4", ps4_game_list, ps4_games)
     ps5_games = modify_json.update("PS5", ps5_game_list, ps5_games)
-    oculus_games = modify_json.update("Oculus", oculus_game_list, oculus_games)
+    #oculus_games = modify_json.update("Oculus", oculus_game_list, oculus_games)
 
     #   Fetches data for each PS game and compiles a message to send to the email
     no_ps4_deals, ps4_message, ps4_games = fetch.prices("PS4", ps4_games)

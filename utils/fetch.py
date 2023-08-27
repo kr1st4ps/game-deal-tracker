@@ -38,7 +38,7 @@ def prices(console, games):
 
         if console == "PS4" or console == "PS5":
             try:
-                price, discount, full_price = ps(game["name"], console)
+                price, discount, full_price, ps_plus = ps(game["name"], console)
             except Exception as e:
                 error_txt = "Encountered exception -{}- for {} of {}".format(e, game["name"], console)
                 logging.error(error_txt)
@@ -63,8 +63,13 @@ def prices(console, games):
         if previous_price is None:
             previous_price = float(full_price)
 
+        if game["ps plus"] != ps_plus:
+            game["ps plus"] = ps_plus
+            if ps_plus is not None:
+                no_deals += 1
+                message += "\n\t" + game["name"] + " has been added to PS Plus " + str(ps_plus) + "!\n"
+
         if float(price) < float(previous_price):
-            game["notification"] = True
             no_deals += 1
             game["best price"] = game["price"]
             if discount == None:
@@ -97,6 +102,11 @@ def ps(game_name, console):
                 product_type = item.find('span', {"class":'psw-product-tile__product-type psw-t-bold psw-t-size-1 psw-t-truncate-1 psw-c-t-2 psw-t-uppercase psw-m-b-1'})
             except:
                 product_type = None
+            try:
+                ps_plus = item.find('span', {"class":'psw-truncate-text-1 psw-c-t-ps-plus'}).text
+            except:
+                ps_plus = None
+                
 
             if name != game_name or console not in consoles:
                 continue
@@ -121,7 +131,7 @@ def ps(game_name, console):
         discount = None
         full_price = price
 
-    return price[1:], discount, full_price[1:]
+    return price[1:], discount, full_price[1:], ps_plus
 
 
 def oculus(game_name, current_price_trigger=None, base_price_trigger=None, best_price_trigger=None):
