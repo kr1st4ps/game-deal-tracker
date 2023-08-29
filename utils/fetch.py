@@ -95,6 +95,8 @@ def ps(game_name, console):
     for item in search.find_all('li', {'class':''}):
 
         #   Checks name, console, and type
+        product_type = None
+        ps_plus = None
         try:
             name = item.find('span', {"class":'psw-t-body psw-c-t-1 psw-t-truncate-2 psw-m-b-2'}).text.strip()
             consoles = [tag.text for tag in item.find_all('span', {"class":'psw-platform-tag psw-p-x-2 psw-l-line-left psw-t-tag psw-on-graphic'})]
