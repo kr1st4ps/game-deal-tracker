@@ -92,7 +92,7 @@ def ps(game_name, console):
 
     #   Looks for the correct game
     game = None
-    for item in search.find_all('li', {'class':''}):
+    for item in search.find_all('li', {'class':'psw-l-w-1/2@mobile-s psw-l-w-1/2@mobile-l psw-l-w-1/6@tablet-l psw-l-w-1/4@tablet-s psw-l-w-1/6@laptop psw-l-w-1/8@desktop psw-l-w-1/8@max'}):
 
         #   Checks name, console, and type
         product_type = None
